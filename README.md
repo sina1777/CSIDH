@@ -61,7 +61,7 @@ This repository contains **both FPGA and ASIC source code** for a CSIDH hardware
   - Ensures **constant-time** behavior to avoid timing side-channels during validation.  
   - Provides **software performance baselines** to benchmark against hardware.
 
-- Testbenches (`tb/*.sv`) compare the hardware outputs with the KATs and report mismatches, timing, and coverage.
+- Testbenches (`tb/*.v`) compare the hardware outputs with the KATs and report mismatches, timing, and coverage.
 
 ---
 
