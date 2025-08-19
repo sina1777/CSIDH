@@ -37,4 +37,39 @@ This work directly targets the **embedded systems use case**. We present both **
 - 🧩 **Modular hardware architecture** – based on building blocks (`xMUL`, `xISOG`, `xAffinize`, `xTwist`, `xDBLADD`) optimized for **constant-time operation**.  
 - 🔒 **Software reference and validation** – we adapted the **original CSIDH C code** into a **constant-time form** for testbenches and performance comparisons. This ensures that our hardware implementation is both **secure and verifiable** against software.  
 
+# 📦 Repository Structure
+
+This repository contains **both FPGA and ASIC source code** for a CSIDH hardware accelerator, with **512-bit** and **1024-bit** configurations, plus testbenches and a constant-time C reference used for verification.
+
+## 🧩 Targets & Configurations
+
+| Target | Width | Top Module                     | Notes |
+|-------:|:-----:|--------------------------------|------|
+| FPGA   | 512   | `top_csidh_fpga_512`           | Uses DSPs/BRAM; constant-time controller; batched xISOG pipeline |
+| FPGA   | 1024  | `top_csidh_fpga_1024`          | Scales params/width; same control schedule |
+| ASIC   | 512   | `top_csidh_asic_512`           | Library-friendly primitives; Booth 32×32 array; two-stage adder |
+| ASIC   | 1024  | `top_csidh_asic_1024`          | Wider datapaths; same controller/state machine |
+
+> **Arithmetic core:** the **512-bit carry-select adder** (two-stage pipeline) and the **parallel 512×512 multiplier** (up/down partial-product folding) are shared by all tops. The 1024-bit variant uses scaled versions of these blocks.
+
+---
+
+## 🧪 Verification & Reference Software
+
+- We use the **modified constant-time CSIDH C** in `sw/csidh_ct/` as the **golden model**:  
+  - Generates deterministic **known-answer tests** (KATs) and random test vectors.  
+  - Ensures **constant-time** behavior to avoid timing side-channels during validation.  
+  - Provides **software performance baselines** to benchmark against hardware.
+
+- Testbenches (`tb/*.sv`) compare the hardware outputs with the KATs and report mismatches, timing, and coverage.
+
+---
+
+## 📝 Paper & Algorithms
+
+- The design flows, algorithms (CSIDH controller, **carry-select adder**, **parallel 512×512 multiplier**), and measurements are **fully described** in our paper:  
+  - **arXiv:** <https://arxiv.org/abs/2508.11082>  
+- The README mirrors the paper’s structure so readers can cross-reference modules and results.
+
+---
 ---
