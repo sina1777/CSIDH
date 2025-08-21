@@ -102,14 +102,6 @@ The accelerator includes **8 top-level implementations**:
 ## 🧪 Verification Strategy  
 - **Golden Model:** Constant-time C implementation (`SW/csidh_ct/`) adapted from the official [CSIDH reference](https://csidh.isogeny.org/).  
 - **Test Vectors:** Known-Answer Tests (KATs) and random vectors generated from the C model.  
-- **Self-Checking Testbenches:** Hardware outputs are automatically compared against the golden model for all 8 configurations.  
 
 ---
 
-## 📝 Publication  
-The full architecture, algorithms, and benchmarks are presented in our research paper:  
-
-**“A Constant-Time Hardware Architecture for the CSIDH Key-Exchange Protocol”**  
-Preprint: [arXiv:2508.11082](https://arxiv.org/abs/2508.11082)  
-
-If you use this repository in your research, please consider citing our work.  
