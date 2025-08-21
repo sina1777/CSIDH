@@ -1,11 +1,6 @@
-# 📖 Overview  
 
-## 🔐 About CSIDH  
-CSIDH (Commutative Supersingular Isogeny Diffie–Hellman) is a post-quantum key exchange protocol designed to secure communications against adversaries equipped with quantum computers. Its security relies on the computational hardness of finding isogenies between supersingular elliptic curves.  
-For more detailed information on the protocol, please refer to the original CSIDH paper:  
-- [Luca De Feo, David Jao, and Jérôme Plût, *CSIDH: An Efficient Post-Quantum Commutative Group Action*, 2018](https://csidh.isogeny.org/)
 
-# 📄 Publication & Introduction  
+# 📖 Overview 
 
 This repository accompanies our research on accelerating **post-quantum cryptography** through hardware implementation of the **CSIDH key-exchange protocol**. Our work addresses one of the most pressing challenges in post-quantum security: enabling **constant-time, high-performance, and energy-efficient execution** of isogeny-based cryptography on embedded and constrained platforms.  
 
@@ -22,7 +17,12 @@ Our complete architecture, algorithms, and benchmark results are described in:
 > *“A Constant-Time Hardware Architecture for the CSIDH Key-Exchange Protocol”*  
 > Preprint available on [arXiv:2508.11082](https://arxiv.org/abs/2508.11082)  
 
-If you use this repository in your research, please consider citing our work.  
+If you use this repository in your research, please consider citing our work.
+
+## 🔐 About CSIDH  
+CSIDH (Commutative Supersingular Isogeny Diffie–Hellman) is a post-quantum key exchange protocol designed to secure communications against adversaries equipped with quantum computers. Its security relies on the computational hardness of finding isogenies between supersingular elliptic curves.  
+For more detailed information on the protocol, please refer to the original CSIDH paper:  
+- [Luca De Feo, David Jao, and Jérôme Plût, *CSIDH: An Efficient Post-Quantum Commutative Group Action*, 2018](https://csidh.isogeny.org/)
 
 ### Key advantages of CSIDH  
 - 🔑 **Compact Keys:** Smaller public keys than many lattice-based candidates, suitable for bandwidth-constrained environments.  
