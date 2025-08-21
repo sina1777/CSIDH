@@ -4,6 +4,26 @@
 CSIDH (Commutative Supersingular Isogeny Diffie–Hellman) is a post-quantum key exchange protocol designed to secure communications against adversaries equipped with quantum computers. Its security relies on the computational hardness of finding isogenies between supersingular elliptic curves.  
 For more detailed information on the protocol, please refer to the original CSIDH paper:  
 - [Luca De Feo, David Jao, and Jérôme Plût, *CSIDH: An Efficient Post-Quantum Commutative Group Action*, 2018](https://csidh.isogeny.org/)
+
+# 📄 Publication & Introduction  
+
+This repository accompanies our research on accelerating **post-quantum cryptography** through hardware implementation of the **CSIDH key-exchange protocol**. Our work addresses one of the most pressing challenges in post-quantum security: enabling **constant-time, high-performance, and energy-efficient execution** of isogeny-based cryptography on embedded and constrained platforms.  
+
+🔍 **Key Contributions of this Work**:  
+- We present the **first unified hardware architecture** for CSIDH, supporting both **FPGA** (for rapid prototyping) and **ASIC** (for long-term low-power deployment) implementations.  
+- The architecture is fully **constant-time by design**, ensuring resistance against timing and power side-channel attacks.  
+- Modular building blocks — including pipelined adders, parallel multipliers, and optimized isogeny operators — enable scalability across both **512-bit** and **1024-bit** security levels.  
+- Our verification strategy integrates a **constant-time C reference implementation** (adapted from the official CSIDH release), ensuring correctness and direct comparability with software baselines.  
+- We provide **end-to-end evaluation** of latency, throughput, and area/power efficiency, demonstrating that hardware acceleration makes CSIDH practical for **real-world embedded systems** such as IoT nodes, smartcards, and secure processors.  
+
+📖 **Reference**:  
+Our complete architecture, algorithms, and benchmark results are described in:  
+
+> *“A Constant-Time Hardware Architecture for the CSIDH Key-Exchange Protocol”*  
+> Preprint available on [arXiv:2508.11082](https://arxiv.org/abs/2508.11082)  
+
+If you use this repository in your research, please consider citing our work.  
+
 ### Key advantages of CSIDH  
 - 🔑 **Compact Keys:** Smaller public keys than many lattice-based candidates, suitable for bandwidth-constrained environments.  
 - 🔄 **Commutative Group Action:** Enables simple, non-interactive Diffie–Hellman-style key exchange.  
