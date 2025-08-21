@@ -2,7 +2,8 @@
 
 ## 🔐 About CSIDH  
 CSIDH (Commutative Supersingular Isogeny Diffie–Hellman) is a post-quantum key exchange protocol designed to secure communications against adversaries equipped with quantum computers. Its security relies on the computational hardness of finding isogenies between supersingular elliptic curves.  
-
+For more detailed information on the protocol, please refer to the original CSIDH paper:  
+- [Luca De Feo, David Jao, and Jérôme Plût, *CSIDH: An Efficient Post-Quantum Commutative Group Action*, 2018](https://csidh.isogeny.org/)
 ### Key advantages of CSIDH  
 - 🔑 **Compact Keys:** Smaller public keys than many lattice-based candidates, suitable for bandwidth-constrained environments.  
 - 🔄 **Commutative Group Action:** Enables simple, non-interactive Diffie–Hellman-style key exchange.  
@@ -55,7 +56,6 @@ This repository provides an **open-source hardware accelerator for CSIDH**, desi
 │       ├── 512/
 │       └── 1024/
 └── SW/                            # C reference & tools
-    ├── csidh_ref/                 # Upstream-style (variable-time)
     └── csidh_ct/                  # Constant-time adaptation (golden model)
 
 
