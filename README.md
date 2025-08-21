@@ -58,7 +58,7 @@ This repository provides an **open-source hardware accelerator for CSIDH**, desi
 └── SW/                            # C reference & tools
     └── csidh_ct/                  # Constant-time adaptation (golden model)
 
-
+```text
 ---
 
 ## 🎯 Targets and Variants  
