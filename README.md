@@ -1,75 +1,86 @@
-# 📖 Overview  
+📖 Overview
+🔐 About CSIDH
 
-## 🔐 About CSIDH  
-**CSIDH (Commutative Supersingular Isogeny Diffie–Hellman)** is a post-quantum key exchange protocol proposed as a candidate for securing communications against adversaries equipped with quantum computers.  
-Unlike classical public-key schemes (RSA, ECC), CSIDH is based on **isogenies between supersingular elliptic curves**, providing resistance to both classical and quantum attacks.  
+CSIDH (Commutative Supersingular Isogeny Diffie–Hellman) is a post-quantum key exchange protocol designed to secure communications against adversaries equipped with quantum computers. Its security relies on the computational hardness of finding isogenies between supersingular elliptic curves.
 
-**Key advantages of CSIDH include:**  
-- 🔑 **Small public keys** compared to lattice-based schemes.  
-- 🔄 **Commutative group action**, enabling efficient key exchange.  
-- 🛡️ **Potential long-term post-quantum security** due to hard mathematical assumptions.  
+Key advantages of CSIDH
 
----
+🔑 Compact Keys: Smaller public keys than many lattice-based candidates, suitable for bandwidth-constrained environments.
 
-## ⚡ Importance of CSIDH Hardware Acceleration in Embedded Systems  
-As **post-quantum cryptography (PQC)** becomes a global requirement, one of the greatest challenges is its deployment on **embedded and resource-constrained devices** such as IoT nodes, smartcards, automotive controllers, and edge processors. Unlike data centers or high-performance servers, these platforms must meet **strict limitations on power, memory, and area**.  
+🔄 Commutative Group Action: Enables simple, non-interactive Diffie–Hellman-style key exchange.
 
-Running CSIDH purely in **software** is often **impractical** in such systems because:  
-- ⚙️ Operations involve **512-bit modular arithmetic**, which is computationally heavy for microcontrollers.  
-- 🔋 Pure software implementations consume **high energy** and result in **long execution times**, unsuitable for battery-powered devices.  
-- ⏱️ Constant-time execution is required to **prevent side-channel attacks**, but this further increases software overhead.  
+🛡️ Quantum-Resistant Security: Based on hard mathematical problems believed to resist quantum algorithms.
 
-**A dedicated hardware accelerator solves these problems by:**  
-- 🚀 **Drastically reducing latency** of key exchange, making PQC feasible for real-time embedded communication.  
-- 🔋 **Improving energy efficiency**, which is critical for IoT and mobile devices.  
-- 🧮 **Offloading complex arithmetic** (additions, multiplications, isogeny evaluations) from the CPU to specialized datapaths.  
-- 📈 **Offering scalability**: FPGA prototypes can be deployed today, while ASIC designs provide long-term, low-power integration for industrial or consumer products.  
+⚡ Why Hardware Acceleration Matters
 
-By enabling **lightweight, constant-time, and high-performance CSIDH operations**, hardware acceleration paves the way for **practical PQC adoption in embedded systems** — ensuring that even small, low-cost devices can remain secure in the post-quantum era.  
+Deploying post-quantum cryptography (PQC) on embedded and resource-constrained devices (IoT, smart cards, automotive controllers, edge processors) presents unique challenges.
 
----
+Software-only CSIDH is often impractical due to:
 
-## 🚀 Our Implementation  
-This work directly targets the **embedded systems use case**. We present both **FPGA and ASIC implementations** of CSIDH:  
+⚙️ High Computational Cost: 512-bit+ modular arithmetic overwhelms microcontrollers.
 
-- 🖧 **FPGA design** – allows rapid prototyping and can be integrated into IoT or edge devices for immediate experimentation.  
-- ⚙️ **ASIC design** – demonstrates how CSIDH can be built into future low-power chips for secure embedded products.  
-- 🧩 **Modular hardware architecture** – based on building blocks (`xMUL`, `xISOG`, `xAffinize`, `xTwist`, `xDBLADD`) optimized for **constant-time operation**.  
-- 🔒 **Software reference and validation** – we adapted the **original CSIDH C code** into a **constant-time form** for testbenches and performance comparisons. This ensures that our hardware implementation is both **secure and verifiable** against software.  
+🔋 Energy Inefficiency: Software execution consumes too much power for battery-powered devices.
 
-# 📦 Repository Structure
+⏱️ Side-Channel Risks: Ensuring constant-time execution in software adds significant overhead.
 
-This repository contains **both FPGA and ASIC source code** for a CSIDH hardware accelerator, with **512-bit** and **1024-bit** configurations, plus testbenches and a constant-time C reference used for verification.
+Benefits of Hardware Acceleration
 
-## 🧩 Targets & Configurations
+🚀 Latency Reduction: Offloads heavy arithmetic for real-time PQC.
 
-| Target | Width | Top Module                     | Notes |
-|-------:|:-----:|--------------------------------|------|
-| FPGA   | 512   | `top_csidh_fpga_512`           | Uses DSPs/BRAM; constant-time controller; batched xISOG pipeline |
-| FPGA   | 1024  | `top_csidh_fpga_1024`          | Scales params/width; same control schedule |
-| ASIC   | 512   | `top_csidh_asic_512`           | Library-friendly primitives; Booth 32×32 array; two-stage adder |
-| ASIC   | 1024  | `top_csidh_asic_1024`          | Wider datapaths; same controller/state machine |
+🔋 Energy Efficiency: Hardware requires a fraction of the power compared to software.
 
-> **Arithmetic core:** the **512-bit carry-select adder** (two-stage pipeline) and the **parallel 512×512 multiplier** (up/down partial-product folding) are shared by all tops. The 1024-bit variant uses scaled versions of these blocks.
+🔒 Robust Security: Hardware enforces constant-time execution, mitigating timing/power side-channel attacks.
 
----
+🚀 Our Implementation
 
-## 🧪 Verification & Reference Software
+This repository provides an open-source hardware accelerator for CSIDH, designed for embedded security and scalable from FPGA prototyping to ASIC integration.
 
-- We use the **modified constant-time CSIDH C** in `sw/csidh_ct/` as the **golden model**:  
-  - Generates deterministic **known-answer tests** (KATs) and random test vectors.  
-  - Ensures **constant-time** behavior to avoid timing side-channels during validation.  
-  - Provides **software performance baselines** to benchmark against hardware.
+🖧 FPGA Target: For research, prototyping, and reconfigurable deployments.
 
-- Testbenches (`tb/*.v`) compare the hardware outputs with the KATs and report mismatches, timing, and coverage.
+⚙️ ASIC Target: Synthesizable design suitable for mass production in low-power secure chips.
 
----
+🧩 Modular Architecture: Built from reusable arithmetic blocks (adder, multiplier, isogeny operators).
 
-## 📝 Paper & Algorithms
+🛡️ Constant-Time by Design: Dedicated controller ensures strict resistance against timing attacks.
 
-- The design flows, algorithms (CSIDH controller, **carry-select adder**, **parallel 512×512 multiplier**), and measurements are **fully described** in our paper:  
-  - **arXiv:** <https://arxiv.org/abs/2508.11082>  
-- The README mirrors the paper’s structure so readers can cross-reference modules and results.
+📐 Scalable Parameters: Supports both CSIDH-512 and CSIDH-1024 configurations.
 
----
----
+📦 Repository Structure
+├── rtl/               # Verilog RTL for all modules (ASIC & FPGA)
+├── tb/                # Verilog testbenches (self-checking, KATs)
+├── sw/                # C reference models (standard & constant-time)
+└── synthesis/         # Example FPGA/ASIC synthesis scripts
+
+🎯 Targets and Variants
+
+The accelerator includes 8 top-level implementations:
+
+Target	Security Model	Parameter Set	Top-Level Module
+FPGA	Standard (Variable-Time)	CSIDH-512	csidh_fpga_std_512_top.v
+FPGA	Standard (Variable-Time)	CSIDH-1024	csidh_fpga_std_1024_top.v
+FPGA	Constant-Time	CSIDH-512	csidh_fpga_ct_512_top.v
+FPGA	Constant-Time	CSIDH-1024	csidh_fpga_ct_1024_top.v
+ASIC	Standard (Variable-Time)	CSIDH-512	csidh_asic_std_512_top.v
+ASIC	Standard (Variable-Time)	CSIDH-1024	csidh_asic_std_1024_top.v
+ASIC	Constant-Time	CSIDH-512	csidh_asic_ct_512_top.v
+ASIC	Constant-Time	CSIDH-1024	csidh_asic_ct_1024_top.v
+
+🔧 Shared Arithmetic Core: All variants rely on a highly optimized two-stage carry-select adder and parallel 512×512 (and 1024×1024) multipliers with partial-product folding.
+
+🧪 Verification Strategy
+
+Golden Model: Constant-time C implementation (sw/csidh_ct/) adapted from the official CSIDH reference
+.
+
+Test Vectors: Known-Answer Tests (KATs) and random vectors generated from the C model.
+
+Self-Checking Testbenches: Hardware outputs are automatically compared against the golden model for all 8 configurations.
+
+📝 Publication
+
+The full architecture, algorithms, and benchmarks are presented in our research paper:
+
+“Hardware Acceleration for CSIDH on FPGA/ASIC”
+Preprint: arXiv:2508.11082
+
+If you use this repository in your research, please consider citing our work.
