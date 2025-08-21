@@ -80,7 +80,7 @@ The accelerator includes **8 top-level implementations**:
 ---
 
 ## 🧪 Verification Strategy  
-- **Golden Model:** Constant-time C implementation (`sw/csidh_ct/`) adapted from the official [CSIDH reference](https://csidh.isogeny.org/).  
+- **Golden Model:** Constant-time C implementation (`SW/csidh_ct/`) adapted from the official [CSIDH reference](https://csidh.isogeny.org/).  
 - **Test Vectors:** Known-Answer Tests (KATs) and random vectors generated from the C model.  
 - **Self-Checking Testbenches:** Hardware outputs are automatically compared against the golden model for all 8 configurations.  
 
