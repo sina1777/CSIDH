@@ -37,14 +37,27 @@ This repository provides an **open-source hardware accelerator for CSIDH**, desi
 ---
 
 ## 📦 Repository Structure  
-.
-├── ASIC/ # Verilog RTL for ASIC target (rtl & test bench)
-├── FPGA/ # Verilog RTL for FPGA target (rtl & test bench)
-└── SW/ # C reference models (standard & constant-time)
 
-yaml
-Copy
-Edit
+```text
+.
+├── ASIC/                          # Synthesizable RTL for ASIC targets (RTL & testbenches)
+│   ├── original/                  # Variable-time (reference)
+│   │   ├── 512/                   # CSIDH-512: top + modules + tb
+│   │   └── 1024/                  # CSIDH-1024: top + modules + tb
+│   └── constant_time/             # Constant-time (hardened)
+│       ├── 512/
+│       └── 1024/
+├── FPGA/                          # RTL for FPGA targets (wrappers, constraints, tb)
+│   ├── original/
+│   │   ├── 512/
+│   │   └── 1024/
+│   └── constant_time/
+│       ├── 512/
+│       └── 1024/
+└── SW/                            # C reference & tools
+    ├── csidh_ref/                 # Upstream-style (variable-time)
+    └── csidh_ct/                  # Constant-time adaptation (golden model)
+
 
 ---
 
