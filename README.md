@@ -64,16 +64,16 @@ This repository provides an **open-source hardware accelerator for CSIDH**, desi
 ## 🎯 Targets and Variants  
 The accelerator includes **8 top-level implementations**:  
 
-| Target | Security Model      | Parameter Set |
-|--------|---------------------|---------------|
-| FPGA   | Standard (Variable-Time) | CSIDH-512  | 
-| FPGA   | Standard (Variable-Time) | CSIDH-1024 | 
-| FPGA   | Constant-Time       | CSIDH-512     | 
-| FPGA   | Constant-Time       | CSIDH-1024    |
-| ASIC   | Standard (Variable-Time) | CSIDH-512  |
-| ASIC   | Standard (Variable-Time) | CSIDH-1024 |
-| ASIC   | Constant-Time       | CSIDH-512     | 
-| ASIC   | Constant-Time       | CSIDH-1024    |
+| Target | Security Model           | Parameter Set |
+|--------|--------------------------|---------------|
+| FPGA   | Standard (Variable-Time) | CSIDH-512     | 
+| FPGA   | Standard (Variable-Time) | CSIDH-1024    | 
+| FPGA   | Constant-Time            | CSIDH-512     | 
+| FPGA   | Constant-Time            | CSIDH-1024    |
+| ASIC   | Standard (Variable-Time) | CSIDH-512     |
+| ASIC   | Standard (Variable-Time) | CSIDH-1024    |
+| ASIC   | Constant-Time            | CSIDH-512     | 
+| ASIC   | Constant-Time            | CSIDH-1024    |
 
 🔧 **Shared Arithmetic Core:** All variants rely on a highly optimized two-stage carry-select adder and parallel 512×512 (and 1024×1024) multipliers with partial-product folding.  
 
