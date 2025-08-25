@@ -29,6 +29,11 @@ For more detailed information on the protocol, please refer to the original CSID
 - 🔄 **Commutative Group Action:** Enables simple, non-interactive Diffie–Hellman-style key exchange.  
 - 🛡️ **Quantum-Resistant Security:** Based on hard mathematical problems believed to resist quantum algorithms.  
 
+### 📜 Acknowledgements & Reference Software
+
+The verification environment for this project utilizes a C-language reference model. This model is a modified version of the original public-domain reference implementation from the official CSIDH website (csidh.isogeny.org).
+
+Our modifications were made for the specific purpose of creating a constant-time golden model to serve as a secure and verifiable reference for our hardware testbenches. The original, unmodified software and its license can be found on the official CSIDH website. We are deeply grateful to the original CSIDH authors for making their work publicly available.
 ---
 
 ## ⚡ Why Hardware Acceleration Matters  
